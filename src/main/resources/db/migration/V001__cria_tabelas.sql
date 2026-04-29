@@ -2,8 +2,8 @@ CREATE TABLE usuario(
                         id serial PRIMARY KEY,
                         nome VARCHAR(255) not null,
                         email VARCHAR(100) not null unique,
-                        senha VARCHAR(20) not null,
-                        telefone varchar(9) not null
+                        senha VARCHAR(100) not null,
+                        telefone varchar(11) not null
 );
 
 
@@ -12,7 +12,7 @@ CREATE TABLE lista(
                       nome VARCHAR(255) NOT NULL,
                       data_criacao TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
                       data_fechamento TIMESTAMP WITH TIME ZONE,
-                      status VARCHAR(20) DEFAULT 'ABERTA' NOT NULL,
+                      status VARCHAR(20) DEFAULT 'ABERTA' NOT NULL check (status in ('ABERTA', 'FECHADA', 'CANCELADA')),
                       valor_total NUMERIC(10,2),
                       id_usuario INTEGER NOT NULL,
 
@@ -29,8 +29,8 @@ CREATE TABLE itens(
                       descricao VARCHAR(255) NOT NULL,
                       quantidade NUMERIC(10,2) NOT NULL,
                       unidade_medida VARCHAR(20) NOT NULL,
-                      status VARCHAR(20) DEFAULT 'PENDENTE' NOT NULL,
-                      valor NUMERIC(10,2) NOT NULL,
+                      status VARCHAR(20) DEFAULT 'PENDENTE' NOT NULL ,
+                      preco NUMERIC(10,2) NOT NULL,
                       id_lista INTEGER NOT NULL,
 
                       CONSTRAINT fk_lista_id_item
